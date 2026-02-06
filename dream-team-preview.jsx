@@ -19,22 +19,14 @@ const springSettle = { type: 'spring', stiffness: 85, damping: 38 };
 export default function BuildYourDreamTeam() {
   const [scrollY, setScrollY] = useState(0);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [theme, setTheme] = useState(() =>
-    typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-  );
   const containerRef = useRef(null);
   const spotifyEmbedRef = useRef(null);
   const { scrollYProgress } = useScroll();
 
-  // Sync theme to <html> so Tailwind dark: variants apply (darkMode: 'class' targets html)
+  // Single theme: dark (black) only — ensure Tailwind dark: variants apply
   useEffect(() => {
-    const root = document.documentElement;
-    if (theme === 'dark') {
-      root.classList.add('dark');
-    } else {
-      root.classList.remove('dark');
-    }
-  }, [theme]);
+    document.documentElement.classList.add('dark');
+  }, []);
 
   // Parallax: gentle 0.1–0.3 intensity for cinematic depth
   const heroY = useTransform(scrollYProgress, [0, 0.35], [0, 120]);
@@ -268,10 +260,9 @@ export default function BuildYourDreamTeam() {
     },
   ];
 
-  const isDark = theme === 'dark';
-  const bgBase = isDark ? 'bg-charcoal' : 'bg-cream';
-  const textBase = isDark ? 'text-cream-light' : 'text-charcoal';
-  const accentUnderline = isDark ? 'bg-sage/30' : 'bg-terracotta/20';
+  const bgBase = 'bg-charcoal';
+  const textBase = 'text-cream-light';
+  const accentUnderline = 'bg-sage/30';
 
   return (
     <div
@@ -328,29 +319,16 @@ export default function BuildYourDreamTeam() {
       />
       <SubtleStaffOverlay />
 
-      {/* ——— Minimal fixed nav: top-right — Back to Top + theme toggle ——— */}
+      {/* ——— Minimal fixed nav: top-right — Back to top ——— */}
       <nav className="fixed top-0 right-0 z-50 flex items-center gap-4 p-6">
         <button
           type="button"
           onClick={scrollToTop}
-          className="text-sm font-light tracking-wide opacity-80 hover:opacity-100 transition-opacity focus:outline-none focus:ring-2 focus:ring-sage/30 focus:ring-offset-2 focus:ring-offset-cream rounded px-3 py-2"
+          className="text-sm font-light tracking-wide opacity-80 hover:opacity-100 transition-opacity focus:outline-none focus:ring-2 focus:ring-sage/30 focus:ring-offset-2 focus:ring-offset-charcoal rounded px-3 py-2"
           data-testid="nav-back-to-top"
           aria-label="Back to top"
         >
           Back to top
-        </button>
-        <button
-          type="button"
-          onClick={() => setTheme((t) => (t === 'light' ? 'dark' : 'light'))}
-          className="rounded-full p-2 border border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-sage/30 focus:ring-offset-2 focus:ring-offset-cream"
-          data-testid="nav-theme-toggle"
-          aria-label="Toggle light/dark mode"
-        >
-          {isDark ? (
-            <svg className="w-4 h-4 text-cream-light" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
-          ) : (
-            <svg className="w-4 h-4 text-charcoal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
-          )}
         </button>
       </nav>
 
