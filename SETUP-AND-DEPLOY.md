@@ -122,6 +122,21 @@ You have two easy options. Pick one.
 
 ---
 
+## Membership sign-up form (emails to you)
+
+The “Become a member” section sends submissions by email. To receive them:
+
+1. Go to [formspree.io](https://formspree.io) and create a free account.
+2. Create a new form and set the **notification email** to the address where you want to receive sign-ups (e.g. your personal email).
+3. Copy your **form ID** (in the form action URL it’s the part after `/f/`, e.g. `xpwnzkzw`).
+4. In the project folder, create a file named `.env` (copy from `.env.example`).
+5. Set: `VITE_FORMSPREE_FORM_ID=your_form_id_here` (replace with your real form ID).
+6. Restart the dev server (`npm run dev`). On deploy (Vercel/Netlify), add the same variable in the project’s environment settings.
+
+Submissions will include the person’s email, their message, and all their answers (books, songs, hobbies, experience, etc.). Your notification email is never shown on the website.
+
+---
+
 ## Quick reference
 
 | Goal              | Command / action                          |
