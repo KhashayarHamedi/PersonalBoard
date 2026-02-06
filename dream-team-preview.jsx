@@ -265,9 +265,10 @@ export default function BuildYourDreamTeam() {
   const accentUnderline = 'bg-sage/30';
 
   return (
+    // Mobile-only fix: safe area insets & prevent horizontal scroll
     <div
       ref={containerRef}
-      className={`min-h-screen ${bgBase} ${textBase} font-sans antialiased`}
+      className={`min-h-screen min-h-[100dvh] ${bgBase} ${textBase} font-sans antialiased overflow-x-hidden pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]`}
       style={{ position: 'relative' }}
     >
       <style>{`
@@ -324,7 +325,7 @@ export default function BuildYourDreamTeam() {
         <button
           type="button"
           onClick={scrollToTop}
-          className="text-sm font-light tracking-wide opacity-80 hover:opacity-100 transition-opacity focus:outline-none focus:ring-2 focus:ring-sage/30 focus:ring-offset-2 focus:ring-offset-charcoal rounded px-3 py-2"
+          className="text-sm font-light tracking-wide opacity-80 hover:opacity-100 transition-opacity focus:outline-none focus:ring-2 focus:ring-sage/30 focus:ring-offset-2 focus:ring-offset-charcoal rounded px-4 py-2 min-h-[44px] touch-manipulation"
           data-testid="nav-back-to-top"
           aria-label="Back to top"
         >
@@ -333,7 +334,7 @@ export default function BuildYourDreamTeam() {
       </nav>
 
       {/* ——— Full-screen hero: oversized title + script subtitle, breathing scale ——— */}
-      <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section id="hero" className="relative min-h-[100dvh] sm:min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-cream-light to-cream dark:from-charcoal dark:to-charcoal-soft" />
         <motion.div
           style={{ y: heroY, opacity: heroOpacity }}
@@ -357,7 +358,7 @@ export default function BuildYourDreamTeam() {
             Wellness • Music • Embodiment
           </motion.p>
           <motion.p
-            className="text-lg lg:text-xl font-light leading-relaxed text-charcoal-muted dark:text-cream-light/70 max-w-2xl mx-auto mt-8"
+            className="text-base sm:text-lg lg:text-xl font-light leading-relaxed text-charcoal-muted dark:text-cream-light/70 max-w-2xl mx-auto mt-8 break-words"
             style={{ lineHeight: 1.8 }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -386,7 +387,7 @@ export default function BuildYourDreamTeam() {
             <button
               type="button"
               onClick={() => scrollToSection('main-content')}
-              className="px-8 py-3 text-sm font-medium tracking-wide text-cream bg-charcoal dark:bg-cream dark:text-charcoal rounded-full hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-sage/40 focus:ring-offset-2 focus:ring-offset-cream"
+              className="px-6 sm:px-8 py-3 text-sm font-medium tracking-wide text-cream bg-charcoal dark:bg-cream dark:text-charcoal rounded-full hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-sage/40 focus:ring-offset-2 focus:ring-offset-cream min-h-[44px] touch-manipulation"
               data-testid="hero-explore"
             >
               Explore the vision
@@ -394,7 +395,7 @@ export default function BuildYourDreamTeam() {
             <button
               type="button"
               onClick={() => scrollToSection('team')}
-              className="px-8 py-3 text-sm font-medium tracking-wide border border-charcoal/20 dark:border-cream-light/20 rounded-full hover:bg-charcoal/5 dark:hover:bg-cream-light/5 transition-colors focus:outline-none focus:ring-2 focus:ring-sage/40 focus:ring-offset-2 focus:ring-offset-cream"
+              className="px-6 sm:px-8 py-3 text-sm font-medium tracking-wide border border-charcoal/20 dark:border-cream-light/20 rounded-full hover:bg-charcoal/5 dark:hover:bg-cream-light/5 transition-colors focus:outline-none focus:ring-2 focus:ring-sage/40 focus:ring-offset-2 focus:ring-offset-cream min-h-[44px] touch-manipulation"
               data-testid="hero-meet-team"
             >
               Meet the dream team
@@ -409,7 +410,7 @@ export default function BuildYourDreamTeam() {
             <button
               type="button"
               onClick={() => scrollToSection('main-content')}
-              className="inline-flex flex-col items-center gap-2 text-charcoal-muted dark:text-cream-light/60 hover:text-charcoal dark:hover:text-cream-light transition-colors focus:outline-none"
+              className="inline-flex flex-col items-center gap-2 text-charcoal-muted dark:text-cream-light/60 hover:text-charcoal dark:hover:text-cream-light transition-colors focus:outline-none min-h-[44px] touch-manipulation"
               data-testid="hero-scroll"
               aria-label="Scroll down"
             >
@@ -442,10 +443,10 @@ export default function BuildYourDreamTeam() {
                 viewport={{ once: true, margin: '-80px', amount: 0.2 }}
                 transition={{ ...springReveal, delay: 0.08 }}
               >
-                <p className="font-sans text-lg lg:text-xl font-light leading-[1.85] text-charcoal dark:text-cream-light/90">
+                <p className="font-sans text-base sm:text-lg lg:text-xl font-light leading-[1.85] text-charcoal dark:text-cream-light/90 break-words">
                   My mission is to create music and embodied wellness experiences that help people reconnect with their inner wisdom, self-worth, and presence.
                 </p>
-                <p className="font-sans text-lg lg:text-xl font-light leading-[1.85] text-charcoal dark:text-cream-light/90">
+                <p className="font-sans text-base sm:text-lg lg:text-xl font-light leading-[1.85] text-charcoal dark:text-cream-light/90 break-words">
                   Through meditation, voice, and conscious community, I aim to support lasting wellbeing that integrates into everyday life.
                 </p>
                 <div className={`h-px w-16 ${accentUnderline} rounded-full`} />
@@ -648,7 +649,7 @@ export default function BuildYourDreamTeam() {
           ))}
         </div>
 
-        <div className="relative z-10 max-w-4xl mx-auto px-8 text-center mb-14">
+        <div className="relative z-10 max-w-4xl mx-auto px-6 sm:px-8 text-center mb-14">
           <motion.span
             className="block text-xs uppercase tracking-widest text-charcoal-muted dark:text-cream-light/50 mb-4"
             initial={{ opacity: 0, y: 20 }}
@@ -668,7 +669,7 @@ export default function BuildYourDreamTeam() {
             Listen to my song and choose your impression
           </motion.h2>
           <motion.p
-            className="font-sans text-lg font-light text-charcoal-muted dark:text-cream-light/70 max-w-xl mx-auto"
+            className="font-sans text-base sm:text-lg font-light text-charcoal-muted dark:text-cream-light/70 max-w-xl mx-auto break-words"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -693,7 +694,7 @@ export default function BuildYourDreamTeam() {
           />
         </motion.div>
 
-        <div className="relative z-10 min-h-[320px] sm:min-h-[380px] flex items-center justify-center px-4">
+        <div className="relative z-10 min-h-[320px] sm:min-h-[380px] flex items-center justify-center px-3 sm:px-4">
           <div className="flex flex-wrap justify-center gap-3 sm:gap-4 max-w-4xl mx-auto">
             {songImpressions.map((item, i) => {
               const count = impressionCounts[item.id] || 0;
